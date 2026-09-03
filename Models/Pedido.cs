@@ -14,4 +14,4 @@ namespace Trabalho_Fruteira.Models
         public ICollection<ItemPedido> ItensPedido { get; set; }
             = new List<ItemPedido>();
     }
-}
+} 
