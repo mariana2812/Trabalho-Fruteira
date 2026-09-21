@@ -12,7 +12,6 @@ namespace Trabalho_Fruteira.Models
 
         public string? Preferencia { get; set; }
 
-        public int CEP { get; set; }
 
         [JsonIgnore]
         public ICollection<Pedido> Pedidos { get; set; }
