@@ -16,7 +16,7 @@ namespace Trabalho_Fruteira.Controllers
             _context = context;
         }
 
-        // POST: cadastra uma venda.
+        
         [HttpPost]
         public async Task<ActionResult> Registrar(Pedido dados)
         {
@@ -67,7 +67,7 @@ namespace Trabalho_Fruteira.Controllers
             return Ok(pedido);
         }
 
-        // GET: lista todas as vendas com seus itens.
+        
         [HttpGet]
         public async Task<ActionResult> Listar()
         {
@@ -78,7 +78,7 @@ namespace Trabalho_Fruteira.Controllers
             return Ok(pedidos);
         }
 
-        // GET: mostra os itens de uma venda.
+
         [HttpGet("{id}/itens")]
         public async Task<ActionResult> Itens(int id)
         {
@@ -92,7 +92,7 @@ namespace Trabalho_Fruteira.Controllers
             return Ok(pedido.Itens);
         }
 
-        // GET: mostra o total de uma venda.
+
         [HttpGet("{id}/total")]
         public async Task<ActionResult> Total(int id)
         {
@@ -108,7 +108,7 @@ namespace Trabalho_Fruteira.Controllers
             });
         }
 
-        // PUT: substitui o cliente e todos os itens da venda.
+        
         [HttpPut("{id}")]
         public async Task<ActionResult> Alterar(int id, Pedido dados)
         {
@@ -133,7 +133,7 @@ namespace Trabalho_Fruteira.Controllers
                     return BadRequest("A quantidade deve ser maior que zero.");
             }
 
-            // Devolve as quantidades antigas ao estoque.
+            
             foreach (var item in pedido.Itens)
             {
                 var fruta = await _context.Fruta.FindAsync(item.FrutaId);
@@ -147,7 +147,7 @@ namespace Trabalho_Fruteira.Controllers
             var novosItens = new List<ItemPedido>();
             decimal total = 0;
 
-            // Prepara os novos itens e desconta suas quantidades.
+            
             foreach (var item in dados.Itens)
             {
                 var fruta = await _context.Fruta.FindAsync(item.FrutaId);
@@ -172,7 +172,6 @@ namespace Trabalho_Fruteira.Controllers
                 fruta.Estoque -= item.Quantidade;
             }
 
-            // Remove os itens antigos e coloca os novos.
             _context.ItemPedido.RemoveRange(pedido.Itens);
 
             pedido.Itens = novosItens;
@@ -184,7 +183,6 @@ namespace Trabalho_Fruteira.Controllers
             return Ok(pedido);
         }
 
-        // PATCH: altera somente o cliente da venda.
         [HttpPatch("{id}/cliente")]
         public async Task<ActionResult> AlterarCliente(
             int id,
@@ -207,7 +205,7 @@ namespace Trabalho_Fruteira.Controllers
             return Ok(pedido);
         }
 
-        // DELETE: exclui a venda e devolve o estoque.
+     
         [HttpDelete("{id}")]
         public async Task<ActionResult> Excluir(int id)
         {
